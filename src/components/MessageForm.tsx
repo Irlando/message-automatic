@@ -32,51 +32,55 @@ export const MessageForm: React.FC<MessageFormProps> = ({ onSubmit, isLoading })
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-xl" name="messageForm">
-      <div>
-        <label htmlFor="message-prompt" className="block text-sm font-medium text-gray-700 mb-1">
-          Your Request
-        </label>
-        <textarea
-          id="message-prompt"
-          name="message-prompt"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-          placeholder="Describe what kind of message you want..."
-          rows={3}
-          required
-        />
-      </div>
+    <div className="flex justify-center w-full">
+      <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-md bg-white p-8 rounded-lg shadow-md" name="messageForm">
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="message-prompt" className="block text-sm font-medium text-gray-700 mb-1">
+              Your Request
+            </label>
+            <textarea
+              id="message-prompt"
+              name="message-prompt"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 min-h-[120px]"
+              placeholder="Describe what kind of message you want..."
+              rows={4}
+              required
+            />
+          </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Select
-          id="message-category"
-          name="message-category"
-          label="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value as MessageCategory)}
-          options={CATEGORY_OPTIONS}
-        />
-        <Select
-          id="message-tone"
-          name="message-tone"
-          label="Tone"
-          value={tone}
-          onChange={(e) => setTone(e.target.value as MessageTone)}
-          options={TONE_OPTIONS}
-        />
-      </div>
+          <Select
+            id="message-category"
+            name="message-category"
+            label="Category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value as MessageCategory)}
+            options={CATEGORY_OPTIONS}
+          />
 
-      <Button
-        type="submit"
-        id="submit-button"
-        name="submit-button"
-        isLoading={isLoading}
-        disabled={isLoading || !prompt.trim()}
-      >
-        Generate Message
-      </Button>
-    </form>
+          <Select
+            id="message-tone"
+            name="message-tone"
+            label="Tone"
+            value={tone}
+            onChange={(e) => setTone(e.target.value as MessageTone)}
+            options={TONE_OPTIONS}
+          />
+        </div>
+
+        <Button
+          type="submit"
+          id="submit-button"
+          name="submit-button"
+          isLoading={isLoading}
+          disabled={isLoading || !prompt.trim()}
+          className="w-full"
+        >
+          Generate Message
+        </Button>
+      </form>
+    </div>
   );
 };
